@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "GetDiscussion";
+    string tenantKey = Request.QueryString["TenantKey"];
+    string authToken = Request.QueryString["AuthToken"];
+}
+
+<h1>GET api/v1.0/Discussions/GetDiscussion?discussionKey={discussionKey}</h1>
+
+<h2>Description</h2>
+<div>Get the Discussion by it's Unique Key.</div>
+
+<h2>Param Input</h2>
+@using (Html.BeginForm("GetDiscussion", "HLApi", FormMethod.Get))
+{
+    @Html.Label("Tenant Key:")
+    @Html.Hidden("tenantKey", tenantKey)
+    @tenantKey<br /><br />
+    @Html.Label("Authentication Token:")
+    @Html.Hidden("authToken", authToken)
+    @authToken<br /><br />
+    @Html.Label("Discussion Key:")
+    @Html.TextBox("discussionKey")<br />
+    <input type="submit" value="Submit"/>
+}
+
+<h2>Examples</h2>
+@Html.Label("C# Code (JSON Format):")
+<div style="display:block;"><pre>string url = "api/v1.0/Discussions/GetDiscussion?discussionKey=@ViewData["discussionKey"]";
+HttpClient client = new HttpClient();
+client.BaseAddress = new Uri("https://api.connectedcommunity.org/");
+client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+client.DefaultRequestHeaders.Add("HLTenantKey", "@tenantKey");
+client.DefaultRequestHeaders.Add("HLAuthToken", "@authToken");
+
+string whoAmI = null;
+
+HttpResponseMessage response = client.GetAsync(url).Result;
+if (response.IsSuccessStatusCode)
+{
+    whoAmI = response.Content.ReadAsStringAsync().Result;
+}</pre></div>
+
+@Html.Label("Sample Output:")
+<div style="font-family:Monospace;"><pre>@MvcHtmlString.Create(Html.Encode(ViewData["getDiscussion"]))</pre></div>
+@Html.Label("Javascript Code (JSON Format):")
+
+@{
+string htmlText = @"Goes in header:
+<script type=""text/javascript"" src=""https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js""></script>
+
+Goes in body:
+<script type=""text/javascript"">
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'https://api.connectedcommunity.org/api/v1.0/Discussions/GetDiscussion?discussionKey=@ViewData[""discussionKey""]',
+            contentType: 'application/json',
+            headers: { 'HLTenantKey': '@tenantKey', 'HLAuthToken': '@authToken' }
+        })
+        .done(function (data) {
+            var strArray = JSON.stringify(data).split("","");
+            for (strIndex in strArray) {
+                document.write(strArray[strIndex] + ""<br>"");
+            }
+        });
+    });
+</script>";
+}
+<pre>@MvcHtmlString.Create(Html.Encode(htmlText.Replace("@tenantKey", tenantKey).Replace("@authToken", authToken)).Replace("@ViewData[&quot;discussionKey&quot;]", (string)ViewData["discussionKey"]))</pre>

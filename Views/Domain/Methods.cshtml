@@ -1,0 +1,105 @@
+﻿ @{
+    ViewBag.Title = "Methods";
+    string tenantKey = Request.QueryString["TenantKey"];
+    string authToken = Request.QueryString["AuthToken"];
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<center>
+    
+    <table>
+        <tr>
+            <td colspan = 2><h1>Contacts</h1></td>
+        </tr> 
+        <tr>
+            <th>Name:</th>
+            <th>Description:</th>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/PostWhoAmI?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Contacts/WhoAmI</a></td>
+            <td>Returns information about the Currently Authenticated User.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetWhoAmI?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Contacts/GetWhoAmI</a></td>
+            <td>Returns information about the Currently Authenticated User.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetContactWithContactKey?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Contacts/GetContact?contactKey={contactKey}</a></td>
+            <td>Returns Contact information for the specified contactKey.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetContactWithLegacyContactKey?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Contacts/GetContact?legacyContactKey={legacyContactKey}</td>
+            <td>Returns Contact information for the specified legacyContactKey.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetMyContacts?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Contacts/GetMyContacts</td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr>
+            <td colspan = 2><h1>Discussions</h1></td>
+        </tr> 
+        <tr>
+            <th>Name:</th>
+            <th>Description:</th>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetDiscussion?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Discussions/GetDiscussion?discussionKey={discussionKey}</a></td>
+            <td>Get the Discussion by it's Unique Key.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetDiscussionPost?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Discussions/GetDiscussionPost?discussionPostKey={discussionPostKey}</a></td>
+            <td>Get a DiscussionPost by it's Unique Key.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetSubscribedDiscussions?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Discussions/GetSubscribedDiscussions</a></td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetDiscussionPosts?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Discussions/GetDiscussionPosts?discussionKey={discussionKey}</td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetDiscussionPosts?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/GetDiscussionPosts</td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr> 
+            <td><a href="/HLApi/SubmitDiscussionPost?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/SubmitDiscussionPost</a></td>
+            <td>Returns a list of Discussion Posts for the Current User.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetEligibleDiscussions?TenantKey=@tenantKey&AuthToken=@authToken">GET api/v1.0/Discussions/GetEligibleDiscussions</a></td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/PostToDiscussionWithCrossPost?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/PostToDiscussionWithCrossPost</a></td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/PostToDiscussionAnonymously?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/PostToDiscussionAnonymously</td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/PostToDiscussion?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/PostToDiscussion</td>
+            <td>Post a Message to the specified Discussion.</td>
+        </tr>
+        <tr> 
+            <td><a href="/HLApi/ReplyToDiscussion?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/ReplyToDiscussion</a></td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/ReplyToDiscussionAnonymously?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/ReplyToDiscussionAnonymously</a></td>
+            <td>No documentation available.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetContactWithContactKey?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/ReplyToDiscussionPost</a></td>
+            <td>Sends a Reply to a specified Discussion Post.</td>
+        </tr>
+        <tr>
+            <td><a href="/HLApi/GetContactWithLegacyContactKey?TenantKey=@tenantKey&AuthToken=@authToken">POST api/v1.0/Discussions/Search</td>
+            <td>No documentation available.</td>
+        </tr>
+    </table>
+</center>

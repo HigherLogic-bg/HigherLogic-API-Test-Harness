@@ -1,0 +1,28 @@
+﻿@model APITest.Models.DomainModel
+@{
+    ViewBag.Title = "Domain";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Check your Domain.</h2>
+</hgroup>
+
+@using (Html.BeginForm("Check", "Domain")) {
+    
+    <fieldset>
+        <legend>Domain Check</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(d => d.Domain)
+                @Html.TextBoxFor(d => d.Domain)
+                <p><font size="3" color="red">Domain not found. Try Again.</font></p>
+            </li>
+        </ol>
+        <input type="submit" value="Check"/>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

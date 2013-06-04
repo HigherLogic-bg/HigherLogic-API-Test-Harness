@@ -1,0 +1,37 @@
+﻿@model APITest.Models.LoginWithTenantDetailModel
+@{
+    if (Request.QueryString["preView"] != null) {
+        ViewBag.Title = "We apologize, but your AuthToken has expired...oh well!";
+    }
+    else {
+        ViewBag.Title = "Found website!";
+    }
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+@using (Html.BeginForm("Check2", "Domain"))
+{
+    
+    <fieldset>
+        <legend>Login Check</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(l => l.Login.Username)
+                @Html.TextBoxFor(l => l.Login.Username)
+                @Html.ValidationMessageFor(l => l.Login.Username)
+            </li>
+
+                @Html.ValidationSummary(true,"Login was unsuccessful. Please correct the errors and try again.")
+
+            <li>
+                @Html.LabelFor(l => l.Login.Password)
+                @Html.PasswordFor(l => l.Login.Password)
+                @Html.ValidationMessageFor(l => l.Login.Password)
+            </li>
+        </ol>
+        <input type="submit" value="Login"/>
+    </fieldset>
+}

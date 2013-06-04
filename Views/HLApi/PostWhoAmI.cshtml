@@ -1,0 +1,85 @@
+﻿@{
+    string tenantKey = Request.QueryString["TenantKey"];
+    string authToken = Request.QueryString["AuthToken"];
+}
+<script type = "text/javascript" language = "javascript">
+    function hideBlock(id) {
+        var idElement = document.getElementById(id);
+        if (idElement.style.display != 'none') {
+            idElement.style.display == 'none';
+        }
+        else {
+            idElement.style.display == 'block';
+        }
+    }
+</script>
+
+<h1>POST api/v1.0/Contacts/WhoAmI</h1>
+
+<h2>Description</h2>
+<div>Returns information about the Currently Authenticated User.</div>
+
+<h2>Param Input</h2>
+@Html.Label("Tenant Key:")
+@tenantKey<br /><br />
+@Html.Label("Authentication Token:")
+@authToken
+
+<h2>Examples</h2>
+<div onclick = "hideBlock('csblock')">@Html.Label("C# Code (JSON Format):")</div>
+<div id = "csblock" style="display:block;"><xmp>string url = "api/v1.0/Contacts/WhoAmI";
+HttpClient client = new HttpClient();
+client.BaseAddress = new Uri("https://api.connectedcommunity.org/");
+client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+client.DefaultRequestHeaders.Add("HLTenantKey", "@tenantKey");
+client.DefaultRequestHeaders.Add("HLAuthToken", "@authToken");
+
+var content = new System.Net.Http.FormUrlEncodedContent(new[] 
+{
+    new KeyValuePair<string, string>()
+});
+
+string whoAmI = null;
+
+HttpResponseMessage response = client.PostAsync(url, content).Result;
+if (response.IsSuccessStatusCode)
+{
+    whoAmI = response.Content.ReadAsStringAsync().Result;
+}</xmp></div>
+
+@Html.Label("Sample Output:")
+<div style="font-family:Monospace;"><br />@MvcHtmlString.Create(Html.Encode(ViewData["whoAmI"]).Replace(Environment.NewLine, "<br/>").Replace(" ", "&nbsp;&nbsp;"))<br /></div>
+@Html.Label("Javascript Code (JSON Format):")
+@{
+    string htmlText = @"Goes in header:
+<script type=""text/javascript"" src=""https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js""></script>
+
+Goes in body:
+<script type=""text/javascript"">
+    $(document).ready(function () {
+        $.ajax({
+            type: 'POST',
+            url: 'https://api.connectedcommunity.org/api/v1.0/Contacts/WhoAmI',
+            contentType: 'application/json',
+            headers: { 'HLTenantKey': '@tenantKey', 'HLAuthToken': '@authToken' }
+        })
+        .done(function (data) {
+            var strArray = JSON.stringify(data).split("","");
+            for (strIndex in strArray) {
+                document.write(strArray[strIndex] + ""<br>"");
+            }
+        });
+    });
+</script>";
+}
+<pre>@MvcHtmlString.Create(Html.Encode(htmlText.Replace("@tenantKey", tenantKey).Replace("@authToken", authToken)))</pre>
+<h2>Widgets</h2>
+@{
+    Newtonsoft.Json.Linq.JObject results = (Newtonsoft.Json.Linq.JObject) ViewData["results"];
+}
+@Html.Label("Profile Page:")
+<div style="background-color: Black;"><div style="float:left"><img src="@results.Property("PictureUrl").Value" /></div>
+<div style="float:left">
+&nbsp;Name: @results.Property("FirstName").Value @results.Property("LastName").Value<br />
+&nbsp;Email: @results.Property("EmailAddress").Value
+</div></div>

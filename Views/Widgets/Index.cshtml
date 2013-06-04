@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h1> Profile Badge Widget</h1>
+<script type="css">
+#Widget {
+    width:800px;
+    margin:0 auto;
+    border: 2px solid orange;
+    display: block;
+}
+</script>
+
+<h2>Widgets</h2>
+
+<a href="/Widgets/LatestDiscussions?TenantKey=@Url.Encode((string)ViewData["tenantKey"])&AuthToken=@Url.Encode((string)ViewData["authToken"])">Latest Discussions</a>
+
+<div id="Welcome_Content" class="Content">
+        
+                <div class="Welcome">
+                    <div id="Welcome_Details_PicturePanel_0" class="Picture Picture_Profile">
+	
+                        <a id="Welcome_Details_ProfileLink_0" href="/Profile1/Profile/?UserKey=6ef9356b-ca33-4acc-b7a1-2623ca7a84a5"><img id="Welcome_Details_ProfilePic_0" class="Image" height="40" width="40" src="http://www.gravatar.com/avatar.php?gravatar_id=a62e9025f9e00b400854a0b4cfa72e86&amp;s=40&amp;r=g&amp;d=http://cloudfront.higherlogic.com/App_Themes/Common/images/Directory/noImageSmall.gif"></a>
+                    
+	
+        </script>
+                    </div>
+    </div>
